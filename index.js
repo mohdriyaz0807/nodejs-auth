@@ -16,35 +16,6 @@ app.use(express.json());
 app.use(cors())
 
 
-app.get("/get-user/:id", async (req, res) => {
-    try {
-        let clientInfo = await mongoClient.connect(dbURL);
-        let db = clientInfo.db("userRegistration");
-        let data = await db.collection("user").findOne({
-            _id: objectId(req.params.id)
-        });
-        res.status(200).json({data});
-        clientInfo.close();
-    } catch (error) {
-        console.log(error);
-        res.send(500);
-    }
-});
-
-app.put("/update-user/:id", async (req, res) => {
-    try {
-        let clientInfo = await mongoClient.connect(dbURL);
-        let db = clientInfo.db("userRegistration");
-        let data = await db.collection("user").updateOne({
-            _id: objectId(req.params.id)
-        },{$set:req.body});
-        res.status(200).json({message: "User updated"});
-        clientInfo.close();
-    } catch (error) {
-        console.log(error);
-        res.send(500);
-    }
-})
 
 app.post("/register", async (req, res) => {
     try {
