@@ -10,7 +10,7 @@ const objectId = mongodb.ObjectID;
 
 const app = express();
 const dbURL = process.env.DB_URL ||"mongodb://127.0.0.1:27017";
-
+const port = process.env.PORT || 3000
 
 app.use(express.json());
 app.use(cors())
@@ -155,4 +155,4 @@ app.post("/register", async (req, res) => {
 
 
 
-app.listen(3000, () => console.log("your app runs with port: 3000"));
+app.listen(port, () => console.log("your app runs with port:",port));
