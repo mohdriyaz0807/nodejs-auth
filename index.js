@@ -1,21 +1,17 @@
+const cors = require('cors')
 const express = require("express");
 const mongodb = require("mongodb");
-const cors = require('cors')
-const bcrypt=require('bcrypt')
 const nodemailer = require("nodemailer")
+const bcrypt=require('bcrypt')
 require('dotenv').config()
 
 const mongoClient = mongodb.MongoClient;
-const objectId = mongodb.ObjectID;
 
 const app = express();
 const dbURL = process.env.DB_URL ||"mongodb://127.0.0.1:27017";
 const port = process.env.PORT || 3000
-
+app.use(cors())
 app.use(express.json());
-app.use(cors({origin:true}))
-
-
 
 app.post("/register", async (req, res) => {
     try {
